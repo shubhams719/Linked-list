@@ -1,5 +1,6 @@
 struct Node;
 
+
 Node* GetNode(int data);
 
 void push(Node*& head,int data);
@@ -13,3 +14,7 @@ void Reverse(Node*& head);
 Node* ReverseByK(Node* head,int k);
 
 int Middle(Node* head);
+
+void Swap(Node*& head,int x,int y);
+
+void Delete(Node*& head);
