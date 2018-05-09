@@ -40,13 +40,20 @@ void pop(Node*& head)
 
 void print(Node* head)
 {
-	Node* temp = head;
+	/*Node* temp = head;
 	while(temp != NULL)
 	{
 		std::cout << temp->data << " ";
 		temp= temp->next;
-	}
+	}*/
 	std::cout <<"\n";
+	if(head == NULL)
+		std::cout << "linked list is empty";
+	while(head != NULL)
+	{
+		std::cout << head->data << " ";
+		head= head->next;
+	}
 	return;
 }
 
@@ -100,7 +107,43 @@ int Middle(Node* head)
 	}
 	return slow->data;
 }
-	
+
+
+void Swap(Node*& head,int x,int y)
+{
+	Node* CurrX=NULL;
+	Node* CurrY=NULL;
+	Node* temp = head;
+	while(temp != NULL && ((CurrX == NULL) || (CurrY == NULL)))
+	{
+		if(x == temp->data)
+			CurrX = temp;
+		if(y == temp->data)
+			CurrY = temp;
+		temp = temp->next;
+	}
+	int data = CurrX->data;
+	CurrX->data = CurrY->data;
+	CurrY->data = data;
+	return;
+}
+
+void Delete(Node*& head)
+{
+	Node* temp = head;
+	Node* Next = NULL;
+	while(temp != NULL)
+	{
+		Next = temp->next;
+		delete(temp);
+		temp = Next;
+	}
+	head = NULL;
+	return;
+}
+
+
+
 
 
 
