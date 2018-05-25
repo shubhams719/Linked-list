@@ -4,16 +4,14 @@
 int main()
 {
 	Node* head = NULL;
-	push(head,1);
-	push(head,2);
-	push(head,3);
-	push(head,4);
-	push(head,5);
-	push(head,6);
-	push(head,7);
+	Node* head1 = NULL;
+	Node* head2 = NULL;
 	push(head,8);
-	push(head,9);
-	push(head,10);
-	print(head);
+	push(head,1);
+	push(head1,9);
+	push(head1,9);
+	push(head1,9);
+	Add(head,head1,head2);
+	print(head2);
 	return 0;
 }

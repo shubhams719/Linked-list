@@ -1,5 +1,4 @@
 #include<iostream>
-
 struct Node
 {
 	int data;
@@ -230,13 +229,117 @@ void Segragate(Node*& head)
 	}
 }
 
+void Rotate(Node*& head ,int k)
+{
+	Node* curr = head;
+	Node* tail = head;
+	Node* prev;
+	int count =0;
+
+	while(curr != NULL && count < k)
+	{
+			prev = curr;
+			curr = curr->next;
+			if(tail->next != NULL)
+				tail = tail->next;
+			count++;
+	}
+	while(tail->next != NULL)
+		tail = tail->next;
+	tail->next = head;
+	head = curr;
+	prev->next = NULL;
+}
+
+void check(Node* head)
+{
+
+}
+
+void check1(Node*& head)
+{
+	Node* temp = head;
+	temp = NULL;
+}
+
+int getsize(Node* head)
+{
+	int size=0;
+	while(head != NULL)
+	{
+		head= head->next;
+		size++;
+	}
+	return size;
+}
+
+void swap(Node*& head1,Node*& head2)
+{
+	Node* temp;
+	temp = head1;
+	head1 = head2;
+	head2 = temp;
+}
+
+Node* AddListSameSize(Node* head1,Node* head2,int& carry)
+{
+	int sum;
+	if(!head1)
+		return NULL;
+	Node* result = new Node();
+	result->next = AddListSameSize(head1->next,head2->next,carry);
+	sum = head1->data + head2->data + carry;
+	carry = sum / 10;
+	sum = sum%10;
+	result->data = sum;
+	return result;
+}
+void AddCarryToRemaining(Node* head1,Node* cur, int& carry,Node*& result)
+{
+	int sum;
+	if(head1 != cur)
+	{
+		AddCarryToRemaining(head1->next,cur,carry,result);
+		sum = head1->data + carry;
+		carry = sum / 10;
+		sum = sum % 10;
+		push(result,sum);
+	}
+}
 
 
+void Add(Node* head1,Node* head2,Node*& result)
+{
+	if(!head1)
+	{
+		result = head2;
+		return;
+	}
+	
+	if(!head2)
+	{
+		result = head1;
+		return;
+	}
+	int carry = 0;
+	int size1 = getsize(head1);
+	int size2 = getsize(head2);
+	if(size1 == size2)
+		result = AddListSameSize(head1,head2,carry);
+	else
+	{
+		if(size1 < size2)
+			swap(head1,head2);
+		int diff = (size1 > size2) ? (size1-size2) : (size2-size1);
+		Node* cur;
+		for(cur = head1;diff--;cur = cur->next);
+		result = AddListSameSize(cur,head2,carry);
+		AddCarryToRemaining(head1,cur,carry,result);
+	}
+	if(carry)
+		push(result,carry);
+}
 
-			
 
-		
-
-
-
+	
 
